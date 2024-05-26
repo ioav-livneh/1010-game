@@ -36,6 +36,20 @@ p{
     align-items: center;
 }
 
+.dark-icon{
+    color: #494E55;
+}
+.dark-icon:hover{
+    color: #000000;
+}
+
+.light-icon{
+    color: #BABFC2;
+}
+.light-icon:hover{
+    color: #FFFF;
+}
+
 .col{
     width: 10%;
 }
@@ -114,16 +128,19 @@ body{
 }
 
 button{
-    font-size: 20px;
+    width: 50px;
+    border: none;
+    background: none;
+    /* font-size: 20px;
     padding: 12px 18px;
     font-size: 20px;
     line-height: 19px;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif; font-weight:400;
-    letter-spacing: 3px;
+    letter-spacing: 3px; */
 }
 
-.btn-white{
+/* .btn-white{
     border:solid 2px white;
     background: #eee;
     color: black !important;
@@ -133,7 +150,7 @@ button{
     border:solid 2px black;
     background: #333333;
     color: white !important;
-}
+} */
 
 .vanish{
     transform: scale(0);

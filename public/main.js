@@ -103,20 +103,39 @@ $(document).ready(function (event) {
     }
   });
 
-  //Button theme toggle change
-  $(".theme").click(function (event) {
+  //Theme button
+  $("#theme").click(function (event) {
     $("body").toggleClass("dark-theme");
     $(".tile, .tile div").toggleClass("dark-theme-tile");
-    $("h1").toggleClass("dark-theme-header");
-    if ($(".theme").html() == "Dark Theme") {
-      $(".theme").html("Light Theme");
-      $(".theme").addClass("btn-white");
-      $(".theme").removeClass("btn-black");
+    if ($("#theme i").hasClass("fa-moon")) {
+      $("#theme i").addClass("fa-sun");
+      $("#theme i").removeClass("fa-moon");
+      $("i").addClass("light-icon");
+      $("i").removeClass("dark-icon");
     } else {
-      $(".theme").html("Dark Theme");
-      $(".theme").addClass("btn-black");
-      $(".theme").removeClass("btn-white");
+      $("#theme i").addClass("fa-moon");
+      $("#theme i").removeClass("fa-sun");
+      $("i").addClass("dark-icon");
+      $("i").removeClass("light-icon");
     }
+  });
+
+  //Volume button
+  $("#volume").click(function (event) {
+    if ($("#volume i").hasClass("fa-volume-high")) {
+      $("#volume i").addClass("fa-volume-xmark");
+      $("#volume i").removeClass("fa-volume-high");
+      //turn on sound
+    } else {
+      $("#volume i").addClass("fa-volume-high");
+      $("#volume i").removeClass("fa-volume-xmark");
+      //turn off sound
+    }
+  });
+
+  //Info button
+  $("#info").click(function (event) {
+    //make modal popup
   });
 
   //Show what a placed item will look like
