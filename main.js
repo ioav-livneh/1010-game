@@ -103,7 +103,7 @@ $(document).ready(function (event) {
     }
   });
 
-  //Button theme toggle
+  //Button theme toggle change
   $(".theme").click(function (event) {
     $("body").toggleClass("dark-theme");
     $(".tile, .tile div").toggleClass("dark-theme-tile");
