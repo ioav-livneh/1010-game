@@ -322,9 +322,9 @@ function sound(src) {
     this.sound.pause();
   };
 }
-var success = new sound("/sounds/success.wav");
-var invalid = new sound("/sounds/invalid.mp3");
-var pop = new sound("/sounds/pop.flac");
+var success = new sound("/public/sounds/success.wav");
+var invalid = new sound("/public/sounds/invalid.mp3");
+var pop = new sound("/public/sounds/pop.flac");
 
 //Pick next 3 block-shapes
 function pickThree(array) {
