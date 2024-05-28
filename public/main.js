@@ -106,7 +106,7 @@ $(document).ready(function (event) {
   //Theme button
   $("#theme").click(function (event) {
     $("body").toggleClass("dark-theme");
-    $(".tile, .tile div").toggleClass("dark-theme-tile");
+    $(".tile").toggleClass("dark-theme-tile");
     if ($("#theme i").hasClass("fa-moon")) {
       $("#theme i").addClass("fa-sun");
       $("#theme i").removeClass("fa-moon");
