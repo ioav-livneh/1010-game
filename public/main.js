@@ -3,7 +3,10 @@ $(document).ready(function (event) {
   for (let i = 0; i < 10; i++) {
     html += '<div class="col" col-number="' + i + '">';
     for (let j = 0; j < 10; j++) {
-      html += '  <div class="tile" row-number="' + j + '"><div></div></div>';
+      html +=
+        '  <div class="tile" row-number="' +
+        j +
+        '"><div class="color"></div><div class="hover"></div></div>';
     }
     html += "</div>";
   }
@@ -74,8 +77,11 @@ $(document).ready(function (event) {
       for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
           $(`.col[col-number='${col + i}']`)
-            .find(`.tile[row-number=${row + j}]`)
-            .append(myImage.cloneNode());
+            .find(`.tile[row-number=${row + j}] .color`)
+            .css("background-color", myImage.style.backgroundColor);
+          $(`.col[col-number='${col + i}']`)
+            .find(`.tile[row-number=${row + j}] .hover`)
+            .css("background-color", "transparent");
           grid[row + j][col + i] = 1;
           pointCounter++;
         }
@@ -167,8 +173,8 @@ $(document).ready(function (event) {
       for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
           $(`.col[col-number='${col + i}']`)
-            .find(`.tile[row-number=${row + j}]`)
-            .append(myImage.cloneNode());
+            .find(`.tile[row-number=${row + j}] .hover`)
+            .css("background-color", myImage.style.backgroundColor);
         }
       }
     }
@@ -187,8 +193,8 @@ $(document).ready(function (event) {
       for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
           $(`.col[col-number='${col + i}']`)
-            .find(`.tile[row-number=${row + j}] img:last-child`)
-            .remove();
+            .find(`.tile[row-number=${row + j}] .hover`)
+            .css("background-color", "transparent");
         }
       }
     }
@@ -281,15 +287,25 @@ function checkRow(grid) {
         if (counterOne.length === 10) {
           for (let k = 0; k < 10; k++) {
             grid[counterOne[i][0]][k] = 0;
-            deleteRow = $(`.tile[row-number='${counterOne[i][k]}']`);
-            if (deleteRow) {
-              deleteRow.children("img").addClass("vanish");
-              success.play();
-              $(deleteRow).on("transitionend", function (e) {
-                deleteRow.children("img").remove();
-                checkRow(grid);
-                checkColumn(grid);
-              });
+            deleteRow = $(
+              `.tile[row-number='${counterOne[i][k]}'] .color`
+            ).filter(function () {
+              const bgColor = $(this).css("background-color");
+              return bgColor !== "transparent";
+            });
+            if (deleteRow.length) {
+              (function (deleteRow) {
+                deleteRow.addClass("vanish");
+                success.play();
+
+                setTimeout(() => {
+                  deleteRow.removeClass("vanish");
+                  deleteRow.css("background-color", "transparent");
+                }, 200);
+              })(deleteRow);
+
+              checkRow(grid);
+              checkColumn(grid);
             }
           }
           counterOne = [];
@@ -311,15 +327,25 @@ function checkColumn(grid) {
         if (counterOne.length === 10) {
           for (let k = 0; k < 10; k++) {
             grid[k][counterOne[i][0]] = 0;
-            deleteColumn = $(`.col[col-number='${counterOne[i][k]}']`);
-            if (deleteColumn) {
-              deleteColumn.children().children("img").addClass("vanish");
-              success.play();
-              $(deleteColumn).on("transitionend", function (e) {
-                deleteColumn.children().children("img").remove();
-                checkColumn(grid);
-                checkRow(grid);
-              });
+            var deleteColumn = $(
+              `.col[col-number='${counterOne[i][k]}'] .tile .color`
+            ).filter(function () {
+              const bgColor = $(this).css("background-color");
+              return bgColor !== "transparent";
+            });
+            if (deleteColumn.length) {
+              (function (deleteColumn) {
+                deleteColumn.addClass("vanish");
+                success.play();
+
+                setTimeout(() => {
+                  deleteColumn.removeClass("vanish");
+                  deleteColumn.css("background-color", "transparent");
+                }, 200);
+              })(deleteColumn);
+
+              checkColumn(grid);
+              checkRow(grid);
             }
           }
           counterOne = [];
