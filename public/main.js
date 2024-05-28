@@ -67,18 +67,12 @@ $(document).ready(function (event) {
       }
     }
 
-    if (shapeClicked != null) {
-      var myImage = new Image(44, 44);
-      myImage.style.borderRadius = "5px";
-      myImage.style.backgroundColor = eval(`_${shapeClicked}`).color;
-    }
-
     function place(x, y) {
       for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
           $(`.col[col-number='${col + i}']`)
             .find(`.tile[row-number=${row + j}] .color`)
-            .css("background-color", myImage.style.backgroundColor);
+            .css("background-color", eval(`_${shapeClicked}`).color);
           $(`.col[col-number='${col + i}']`)
             .find(`.tile[row-number=${row + j}] .hover`)
             .css("background-color", "transparent");
@@ -154,8 +148,7 @@ $(document).ready(function (event) {
     let row = parseInt($(this).attr("row-number"));
     surroundingShape = shapesCollection[shapeClicked].surroundingShape;
 
-    let myImage = new Image(44, 44);
-    myImage.style.borderRadius = "5px";
+    let bgColor = "";
 
     for (i = 0; i < surroundingShape.length; i++) {
       if (
@@ -163,10 +156,10 @@ $(document).ready(function (event) {
         col + surroundingShape[i][0] > 9 ||
         grid[row + surroundingShape[i][1]][col + surroundingShape[i][0]] == 1
       ) {
-        myImage.style.backgroundColor = "rgb(255, 200, 200)";
+        bgColor = "rgb(255, 200, 200)";
         break;
       }
-      myImage.style.backgroundColor = "rgb(205, 255, 200)";
+      bgColor = "rgb(205, 255, 200)";
     }
 
     function hoverimage(x, y) {
@@ -174,7 +167,7 @@ $(document).ready(function (event) {
         for (j = 0; j < y; j++) {
           $(`.col[col-number='${col + i}']`)
             .find(`.tile[row-number=${row + j}] .hover`)
-            .css("background-color", myImage.style.backgroundColor);
+            .css("background-color", bgColor);
         }
       }
     }
@@ -234,7 +227,7 @@ function Shape(name, dimension, color) {
   this.name = name;
   this.dimension = dimension;
   this.color = color;
-  var myImage = new Image(dimension[0] * 40, dimension[1] * 40);
+  var myImage = new Image(dimension[0] * 30, dimension[1] * 30);
   myImage.style.backgroundColor = color;
   myImage.style.borderRadius = "5px";
   $(myImage).addClass("shape");
@@ -388,6 +381,7 @@ function pickThree(array) {
   $(".div1").append(newTiles[0].img.cloneNode());
   $(".div2").append(newTiles[1].img.cloneNode());
   $(".div3").append(newTiles[2].img.cloneNode());
+  //slide in from right without scroll
   $(".div").animate({ right: "-100vw" }, 0);
   $(".div1").animate({ right: "0" }, 200);
   $(".div2").animate({ right: "0" }, 300);
