@@ -4,7 +4,7 @@
     position: relative;
 }
 
-p{
+.stats p{
     color: rgb(92,189,228);
     font-family: Helvetica, Geneva, sans-serif;
     font-size: 2em;
@@ -96,7 +96,6 @@ p{
     height: 100%;
     background-image: url("/img/empty.png");
     position: relative;
-    /* animation: slideIn 1s; */
 }
 
 .container{
@@ -107,7 +106,8 @@ p{
     height: 100%;
     background-image: url("/img/empty.png");
     position: relative;
-    z-index: 5
+    z-index: 5;
+    overflow: hidden;
 }
 
 img{
@@ -122,6 +122,7 @@ body{
     align-items: center;
     flex-direction: column;
     margin: 0;
+    overflow-x: hidden;
 }
 
 #game-board{
@@ -157,3 +158,77 @@ button{
     background-color: #666666;
     border: 1px solid #333333;
 }
+
+/* Modal styles */
+.modal {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  
+    .modal-backdrop {
+      background: rgba(0,0,0,0.7);
+      height: 100%;
+      width: 100%;
+      position: fixed;
+    }
+  
+    .modal-content {
+      background: #fff;
+      border-radius: 5px;
+      max-width: 600px;
+      position: fixed;
+      top: -100%;
+      transition: all 0.6s ease;
+      z-index: 10;
+    }
+  
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 1.5rem;
+  
+      .close-modal {
+        font-size: 2rem;
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+  
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-content h2, h3, p{
+        font-family: Helvetica, Geneva, sans-serif;
+        margin:0;
+        line-height: 1.6;
+        margin-top: 1rem;
+    }
+  
+    &.visible {
+        z-index: 10;
+        opacity: 1;
+        visibility: visible;
+  
+      .modal-content {
+        top: 12%;
+      }
+    }
+  }

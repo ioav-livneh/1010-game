@@ -387,3 +387,23 @@ function pickThree(array) {
   $(".div2").animate({ right: "0" }, 300);
   $(".div3").animate({ right: "0" }, 400);
 }
+
+const openModalButtons = document.querySelectorAll("#info"),
+  modal = document.querySelector(".modal"),
+  closeModalButtons = document.querySelectorAll(".close-modal");
+
+openModalButtons.forEach((openBtn) => {
+  openBtn.addEventListener("click", openModal);
+});
+
+closeModalButtons.forEach((closeBtn) => {
+  closeBtn.addEventListener("click", closeModal);
+});
+
+function openModal() {
+  modal.classList.add("visible");
+}
+
+function closeModal() {
+  modal.classList.remove("visible");
+}
