@@ -125,12 +125,16 @@ $(document).ready(function (event) {
     if ($("#volume i").hasClass("fa-volume-high")) {
       $("#volume i").addClass("fa-volume-xmark");
       $("#volume i").removeClass("fa-volume-high");
-      //turn on sound
     } else {
       $("#volume i").addClass("fa-volume-high");
       $("#volume i").removeClass("fa-volume-xmark");
-      //turn off sound
     }
+    //toggle mute
+    var mySounds = $(".sounds");
+    mySounds.each(function () {
+      this.muted = !this.muted;
+      console.log(this);
+    });
   });
 
   //Info button
@@ -329,6 +333,7 @@ function checkColumn(grid) {
 
 function sound(src) {
   this.sound = document.createElement("audio");
+  this.sound.className = "sounds";
   this.sound.src = src;
   this.sound.setAttribute("preload", "auto");
   this.sound.setAttribute("controls", "none");
