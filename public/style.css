@@ -229,10 +229,14 @@ button{
         visibility: visible;
   
       .modal-content {
-        top: 12%;
+        top: 10%;
         @media screen and (max-width: 640px) {
             top: 0%;
           }
       }
     }
+  }
+  ol{
+    font-family: Helvetica, Geneva, sans-serif;
+    line-height: 1.6;
   }
